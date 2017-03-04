@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public enum PLAYER_DIRECTION
 {
     UP,
@@ -14,13 +13,19 @@ public enum PLAYER_DIRECTION
 
 public struct SnakeBody
 {
+    public void SetBody(GameObject bp, PLAYER_DIRECTION dir)
+    {
+        BodyPart = bp;
+        Direction = dir;
+    }
     public GameObject BodyPart;
-    public PLAYER_DIRECTION direction;
+    public PLAYER_DIRECTION Direction;
 };
 
 public class snake : MonoBehaviour {
 
     public GameObject[] BodyParts;
+    public SnakeBody[] BodyStart = new SnakeBody[3];
 
     private enum PLAYER_STATE
     {
@@ -28,41 +33,39 @@ public class snake : MonoBehaviour {
         DEAD,
         EAT
     };
+
     private SnakeBody[] Body;
     private SnakeBody[] TempBody;
-
 
     private PLAYER_STATE PlayerState;
 
     // Use this for initialization
-    snake()
+    void Awake()
     {
-        GameObject head = null, body = null, tail = null;
+        GameObject[] body = new GameObject[3];
 
         foreach (GameObject obj in BodyParts)
         {
             if (obj.tag == "head")
             {
-                head = obj;
+                body[0] = obj;
             }
             else if (obj.tag == "tail")
             {
-                tail = obj;
+                body[2] = obj;
             }
             else if (obj.tag == "body")
             {
-                body = obj;
+                body[1] = obj;
             }
         }
 
-        Body[0].BodyPart = head;
-        Body[1].BodyPart = body;
-        Body[3].BodyPart = tail;
-
-        for (int i = 0; i < 3; i++)
+       for (int i = 0; i < BodyStart.Length; i++)
         {
-            Body[i].direction = PLAYER_DIRECTION.RIGHT;
+            BodyStart[i].BodyPart = body[i];
+            BodyStart[i].Direction = PLAYER_DIRECTION.RIGHT;
         }
+      Body   = BodyStart;
 
     }
     void Start () {
@@ -83,6 +86,7 @@ public class snake : MonoBehaviour {
     }
     bool IsDead()
     {
+        if (PlayerState == PLAYER_STATE.DEAD) return true;
         return false;
     }
 
