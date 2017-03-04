@@ -14,8 +14,8 @@ public enum PLAYER_DIRECTION
 
 public struct SnakeBody
 {
-    GameObject BodyPart;
-    PLAYER_DIRECTION direction;
+    public GameObject BodyPart;
+    public PLAYER_DIRECTION direction;
 };
 
 public class snake : MonoBehaviour {
@@ -35,9 +35,38 @@ public class snake : MonoBehaviour {
     private PLAYER_STATE PlayerState;
 
     // Use this for initialization
+    snake()
+    {
+        GameObject head = null, body = null, tail = null;
+
+        foreach (GameObject obj in BodyParts)
+        {
+            if (obj.tag == "head")
+            {
+                head = obj;
+            }
+            else if (obj.tag == "tail")
+            {
+                tail = obj;
+            }
+            else if (obj.tag == "body")
+            {
+                body = obj;
+            }
+        }
+
+        Body[0].BodyPart = head;
+        Body[1].BodyPart = body;
+        Body[3].BodyPart = tail;
+
+        for (int i = 0; i < 3; i++)
+        {
+            Body[i].direction = PLAYER_DIRECTION.RIGHT;
+        }
+
+    }
     void Start () {
         PlayerState = PLAYER_STATE.ALIVE;
-
 	}
 	
 	// Update is called once per frame
