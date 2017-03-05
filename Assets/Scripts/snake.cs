@@ -62,8 +62,7 @@ public class snake : MonoBehaviour {
 
        for (int i = 0; i < BodyStart.Length; i++)
         {
-            BodyStart[i].BodyPart = body[i];
-            BodyStart[i].Direction = PLAYER_DIRECTION.RIGHT;
+            BodyStart[i].SetBody(body[i], PLAYER_DIRECTION.RIGHT);
         }
       Body   = BodyStart;
 
