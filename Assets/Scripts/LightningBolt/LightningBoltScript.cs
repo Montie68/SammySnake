@@ -261,7 +261,7 @@ namespace DigitalRuby.LightningBolt
         private void UpdateLineRenderer()
         {
             int segmentCount = (segments.Count - startIndex) + 1;
-            lineRenderer.numPositions = segmentCount;
+            lineRenderer.positionCount = segmentCount;
 
             if (segmentCount < 1)
             {
@@ -285,7 +285,7 @@ namespace DigitalRuby.LightningBolt
         {
             orthographic = (Camera.main != null && Camera.main.orthographic);
             lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.numPositions = 0;
+            lineRenderer.positionCount = 0;
             UpdateFromMaterialChange();
         }
 
@@ -297,7 +297,7 @@ namespace DigitalRuby.LightningBolt
                 if (ManualMode)
                 {
                     timer = Duration;
-                    lineRenderer.numPositions = 0;
+                    lineRenderer.positionCount = 0;
                 }
                 else
                 {

@@ -18,7 +18,7 @@ public enum PART_STATE
     EXISTING
 };
 
-public struct SnakeBody
+public class SnakeBody
 {
 
     public void SetBody(GameObject bp, PLAYER_DIRECTION dir)
@@ -29,12 +29,14 @@ public struct SnakeBody
     public GameObject BodyPart;
     public PLAYER_DIRECTION Direction;
     public PART_STATE State;
+    public Vector3 Position;
 
-    SnakeBody(GameObject bp, PLAYER_DIRECTION dir, PART_STATE state = PART_STATE.NEW)
+    SnakeBody(GameObject bp, PLAYER_DIRECTION dir, Vector3 position, PART_STATE state = PART_STATE.NEW )
     {
         this.State = state;
         this.Direction = dir;
         this.BodyPart = bp;
+        this.Position = position;
     }
 };
 
